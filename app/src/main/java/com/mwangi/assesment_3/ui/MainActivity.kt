@@ -1,4 +1,4 @@
-package com.mwangi.assesment_3
+package com.mwangi.assesment_3.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,13 +11,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        setContentView(R.layout.activity_main)
     }
 
     override fun onResume() {
         super.onResume()
         binding.btGetStarted.setOnClickListener {
-            val intent = Intent(this,SignUp::class.java)
+            val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
         }
     }
