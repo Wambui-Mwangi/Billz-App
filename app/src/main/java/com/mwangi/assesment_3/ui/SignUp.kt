@@ -1,14 +1,17 @@
 package com.mwangi.assesment_3.ui
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.SyncStateContract.Constants
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.mwangi.assesment_3.databinding.ActivitySignUpBinding
 import com.mwangi.assesment_3.model.RegisterRequest
+import com.mwangi.assesment_3.utils.constants
 import com.mwangi.assesment_3.viewmodel.UserViewModel
 
 class SignUp : AppCompatActivity() {
@@ -19,6 +22,7 @@ class SignUp : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        redirectUser()
     }
 
     override fun onResume() {
@@ -112,5 +116,15 @@ class SignUp : AppCompatActivity() {
             userViewModel.registerUser(registerRequest)
 
         }
+    }
+
+    fun redirectUser(){
+        val sharedPreferences = getSharedPreferences(constants.PREFS, Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString(constants.USER_ID, constants.EMPTY_STRING)?:constants.EMPTY_STRING
+        if (userId.isNotBlank()){
+            startActivity(Intent(this, Home::class.java))
+            finish()
+        }
+
     }
 }
